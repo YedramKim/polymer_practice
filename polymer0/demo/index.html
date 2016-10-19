@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <style is="custom-style">
+    /* custom-style은 :root 선택자 혹은 폴리머 커스텀 엘리먼트 에만 적용 된다 */
+      :root{
+        --icon-toggle-outline-color : red;
+      }
+      /* icon-toggle-demo 태그 선택자는 icon-toggle-demo :host 선택자 보다 높은 순위 */
+      icon-toggle-demo{
+        --icon-toggle-pressed-color: blue;
+      }
+      body{
+        --icon-toggle-color: purple;
+      }
+      iron-icon{
+        --iron-icon-width: 40px;
+        --iron-icon-height: 40px;
+      }
+    </style>
+    <script>
+      /*
+      window.Polymer = window.Polymer || {};
+      window.Polymer.dom = 'shadow';
+      */
+    </script>
+    <link rel="import" href="icon-toggle-demo.html">
+  </head>
+  <body>
+    <icon-toggle-demo value="hello"></icon-toggle-demo>
+  </body>
+</html>
