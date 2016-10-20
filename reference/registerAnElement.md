@@ -1,0 +1,87 @@
+## Register a custom element
+* 커스텀 엘리먼트는 `Polymer` 함수로 등록을 한다. 그렇게 해서 새로운 엘리먼트가 만들어진다.
+* 프로토 타입에는 반드시 `is` 프로퍼티가 있어야 하며, 그것이 HTML태그의 이름이 되고 반드시 대쉬(-)를 포함해야 한다. 
+``` javascript
+	// register an element
+	MyElement = Polymer({
+
+		is: 'my-element',
+
+		// See below for lifecycle callbacks
+		created: function() {
+			this.textContent = 'My element!';
+		}
+
+	});
+
+	// create an instance with createElement:
+	var el1 = document.createElement('my-element');
+
+	// ... or with the constructor:
+	var el2 = new MyElement();
+```
+
+### Define a custom constructor
+* `Polymer` 함수는 커스텀 엘리먼트를 인스턴스화 시켜 반환하는 생성자 함수를 반환하고 또한 `factory` 메서드를 넣을 수 있다.
+
+``` javascript
+    MyElement = Polymer({
+
+      is: 'my-element',
+
+      factoryImpl: function(foo, bar) {
+        this.foo = foo;
+        this.configureWithBar(bar);
+      },
+
+      configureWithBar: function(bar) {
+        ...
+      }
+
+    });
+
+    var el = new MyElement(42, 'octopus');
+```
+* `factory` 메서드는 오직 위에서 언급한 생성자 함수로 생성했을 때만 적용이 되며, `factory` 메서드는 엘리멘트 초기화 후에 호출된다.
+
+## Lifecycle callbacks
+* Polymer의 기초 프로토타입에는 `lifecycle` 콜백이 포함되어 있으며, 이것은 각자의 상황에 맞게 실행 된다.
+ * created : 엘리먼트가 생성이 될 때 호출
+ * ready : 엘리먼트가 초기화가 완료될 때 호출
+ * attached : 엘리먼트가 DOM 트리에 첨부될 때 호출
+ * detached : 엘리먼트가 DOM 트리에서 삭제될 때 호출
+ * attributeChanged : 엘리먼트의 속성이 변경될 때 호출 (매개변수의 순서는 속성이름, 원래 값, 변경된 값이다.)
+
+* 초기화 순서는 다음과 같다.
+ * `created` 콜백 함수
+ * 로컬 DOM 초기화
+ * `ready` 콜백 함수
+ * `factoryImpl` 콜백 함수
+ * `attached` 콜백 함수
+
+* 또한 `created` 콜백 함수는 부모 요소에서 자식 요소 순으로 `ready`, `attached` 콜백은 자식에서 부모 순으로 호출된다.
+* 만약 `dom-repeat`의 경우 내부의 콜백 요소는 나중에 호출된다.
+
+## Static attributes on host
+* Polymer 프로토 타입에 `hostAttributes` 프로퍼티를 넣으면 해당 HTML 요소를 생성할 때 해당 값이 넣어진다. 기본은 값을 문자열을 넣지만 boolean 값으로 넣으면 true의 경우에는 속성(값은 없음)이 넣어지고 false의 경우 넣지 않는다.
+``` javascript
+    <script>
+
+      Polymer({
+
+        is: 'x-custom',
+
+        hostAttributes: {
+          'string-attribute': 'Value',
+          'boolean-attribute': true,
+          tabindex: 0
+        }
+
+      });
+
+    </script>
+```
+* 결과
+``` HTML
+	<x-custom string-attribute="Value" boolean-attribute tabindex="0"></x-custom>
+```

@@ -10,7 +10,7 @@
 		<input is="iron-input" type="text" bind-value="{{value}}">
 		<toggle-icon toggle="{{value}}"></toggle-icon>
 		<div>
-			{{value}}
+			[[func(value)]]
 		</div>
 		<script>
 			var input = document.querySelector('input');
@@ -18,14 +18,20 @@
 	</template>
 		
 	<script>
-		Polymer({
+		var userElement = Polymer({
 			is : "user-element",
 			properties : {
-				
+				user : {
+					type : String,
+					notify : true,
+					reflectToAttribute : true
+				}
 			},
 			func : function(value) {
 				if(value) {
 					return "toggle is true";
+				}else{
+					return "toggle is false";
 				}
 			}
 		});

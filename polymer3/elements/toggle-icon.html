@@ -4,8 +4,9 @@
 	<template>
 		<style>
 			:host{
-				display: inline-block;
+				display: block;
 				padding: 4px;
+				margin: 10px 0;
 				border-radius: 4px;
 				background: #aaa;
 				-webkit-user-select: none;
@@ -13,9 +14,6 @@
 				-ms-user-select: none;
 				-o-user-select: none;
 				user-select: none;
-			}
-			:host[toggle]{
-
 			}
 		</style>
 		This is toggle icon!! <span>{{func(toggle)}}</span>
@@ -30,6 +28,9 @@
 					notify : true,
 					reflectToAttribute : true
 				}
+			},
+			ready : function() {
+				this.removeAttribute("toggle");
 			},
 			func : function(toggle){
 				if(toggle) {
