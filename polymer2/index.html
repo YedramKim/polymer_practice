@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>polymer-started</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="../webcomponentsjs/webcomponents-lite.js"></script>
+		<style is="custom-style">
+			*{
+        box-sizing : border-box;
+      }
+		</style>
+
+    <!-- custom elements -->
+		<link rel="import" href="./elements/proto-element.html">
+		<link rel="import" href="./elements/dom-module.html">
+		<link rel="import" href="./elements/text-frame.html">
+		<link rel="import" href="./elements/name-tag.html">
+		<link rel="import" href="./elements/properties-set.html">
+		<link rel="import" href="./elements/input-bind-name.html">
+	</head>
+	<body>
+		<proto-element text="Polymer"></proto-element>
+		<dom-element></dom-element>
+		<text-frame><span>Gold</span></text-frame>
+		<name-tag></name-tag>
+		<properties-set name="polymer"></properties-set>
+		<input-bind-name></input-bind-name>
+	</body>
+</html>

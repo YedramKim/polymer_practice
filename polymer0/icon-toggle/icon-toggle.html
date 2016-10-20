@@ -31,20 +31,25 @@
     properties: {
       pressed: {
         type: Boolean,
+        value: false,
         notify: true,
         reflectToAttribute: true,
-        value: false
+        observer : '_changePressed'
       },
-      toggleIcon: {
-        type: String
-      },
+      prop : {
+        type : String
+      }
     },
     listeners: {
       "tap": "toggle",
     },   
     toggle: function() {
+      console.log(this.pressed);
       this.pressed = !this.pressed;
     },
+    _changePressed : function() {
+      console.log("change pressed : ", this.pressed);
+    }
   });
   </script>
 

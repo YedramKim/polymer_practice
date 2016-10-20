@@ -1,0 +1,19 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<dom-module id="proto-element">
+	<script>
+		Polymer({
+			is : "proto-element",
+
+			properties : {
+				text : {
+					type : String
+				}
+			},
+
+			ready : function(e) {
+				this.innerHTML = "<h1>Hello, " + this.text + "</h1>";
+			},
+		})
+	</script>
+</dom-module>

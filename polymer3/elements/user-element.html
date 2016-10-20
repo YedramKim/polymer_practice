@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="./toggle-icon.html">
+
+<dom-module id="user-element">
+	<template>
+		<p>
+			Hello!!
+		</p>
+		<input is="iron-input" type="text" bind-value="{{value}}">
+		<toggle-icon toggle="{{value}}"></toggle-icon>
+		<div>
+			{{value}}
+		</div>
+		<script>
+			var input = document.querySelector('input');
+		</script>
+	</template>
+		
+	<script>
+		Polymer({
+			is : "user-element",
+			properties : {
+				
+			},
+			func : function(value) {
+				if(value) {
+					return "toggle is true";
+				}
+			}
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,25 @@
+{
+  "name": "polymer3",
+  "homepage": "https://github.com/YedramKim/polymer_practice",
+  "authors": [
+    "YedarmKim <oncoder@naver.com>"
+  ],
+  "description": "polymer study2",
+  "main": "index.html",
+  "keywords": [
+    "polymer",
+    "study"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.7.0",
+    "iron-input": "PolymerElements/iron-input#^1.0.10"
+  }
+}

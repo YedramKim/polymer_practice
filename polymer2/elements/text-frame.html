@@ -1,0 +1,23 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<dom-module id="text-frame">
+	<template>
+		<style>
+			div{
+				--var : #f00;
+				display: inline-block;
+				padding: 5px;
+				background: #eee;
+				border-radius: 5px;
+			}
+		</style>
+		<div>
+			<content></content>
+		</div>
+	</template>
+	<script>
+		Polymer({
+			is : "text-frame"
+		});
+	</script>
+</dom-module>

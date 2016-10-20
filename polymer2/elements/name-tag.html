@@ -1,0 +1,23 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<dom-module id="name-tag">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+		This is {{name}}'s Tag.
+		<p>Hello</p>
+	</template>
+
+	<script>
+		Polymer({
+			is : "name-tag",
+
+			ready : function(){
+				this.name = "Yedarm";
+			}
+		});
+	</script>
+</dom-module>

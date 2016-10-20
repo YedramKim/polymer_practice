@@ -1,0 +1,47 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="toggle-icon">
+	<template>
+		<style>
+			:host{
+				display: inline-block;
+				padding: 4px;
+				border-radius: 4px;
+				background: #aaa;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
+				user-select: none;
+			}
+			:host[toggle]{
+
+			}
+		</style>
+		This is toggle icon!! <span>{{func(toggle)}}</span>
+	</template>
+	<script>
+		Polymer({
+			is : "toggle-icon",
+			properties : {
+				toggle : {
+					type : String,
+					value : false,
+					notify : true,
+					reflectToAttribute : true
+				}
+			},
+			func : function(toggle){
+				if(toggle) {
+					return "toggle!!";
+				}
+			},
+			listeners : {
+				"tap" : "tapevent"
+			},
+			tapevent : function() {
+				this.toggle = !this.toggle;
+			}
+		});
+	</script>
+</dom-module>

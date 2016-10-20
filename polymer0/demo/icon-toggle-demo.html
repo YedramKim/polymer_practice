@@ -24,7 +24,6 @@
 
     <!-- use a computed binding to generate the message -->
     <div><span>[[message(isFav)]]</span></div>
-    {{isFav}}
     
     <!-- curly brackets ({{}} allow two-way binding --> 
     <icon-toggle toggle-icon="favorite" pressed="{{isFav}}"></icon-toggle>
@@ -34,6 +33,7 @@
     Polymer({
       is: "icon-toggle-demo",
       message: function(fav) {
+        console.log(fav);
         if (fav) {
           return "You really like me!";
         } else {

@@ -1,0 +1,26 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<dom-module id="properties-set">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+		This is <b>{{name}}</b>'s Tag.
+	</template>
+
+	<script>
+		Polymer({
+			is : "properties-set",
+
+			properties : {
+				name : {
+					type : String,
+					value : "Yedarm",
+					readonly : false
+				}
+			}
+		});
+	</script>
+</dom-module>
