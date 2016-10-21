@@ -28,10 +28,8 @@
 				this.addEventListener("data-value-changed", function(){
 					console.log("change data-value : ", this.getAttribute("data-value"));
 				});
-				console.log(this.response);
+				//response 속성을 1로 설정
 				this._setResponse(1);
-				console.log(this.response);
-
 			},
 			properties : {
 				user : {

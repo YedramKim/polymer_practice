@@ -6,18 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 	<link rel="import" href="/elements/declared-properties.html">
+	<link rel="import" href="/elements/instance-method.html">
 </head>
 <body>
 	<declared-properties data-value="dsds" response="40"></declared-properties>
+	<instance-method></instance-method>
 	<script>
 		// factoryImpl 메서드는  Polymer로 반환된 생성자 함수로 
 		//엘리멘트를 생성했을 경우에만 실행이 되는 메서드다.
-		var MyElement = Polymer({
+		/*var MyElement = Polymer({
 			is : "my-element",
 
 			factoryImpl : function(foo, bar) {
 			}
-		});
+		});*/
 	</script>
 </body>
 </html>

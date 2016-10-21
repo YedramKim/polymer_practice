@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="toggle-tag">
+	<template>
+		<style>
+			:host{
+				display: block;
+				background: #aaa;
+				margin: 10px 0;
+			}
+		</style>
+		<p>
+			This toggle tag;
+		</p>
+		<template is="dom-if" if="{{toggle}}">
+			This tag is Toggle!!
+		</template>
+	</template>
+	<script>
+		Polymer({
+			is : "toggle-tag",
+			properties : {
+				toggle : {
+					type : Boolean,
+					reflectToAttribute : true
+				}
+			},
+			listeners : {
+				"tap" : "tapevent"
+			},
+			tapevent : function(){
+				this.toggleAttribute("toggle");
+			}
+		});
+	</script>
+</dom-module>

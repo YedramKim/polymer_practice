@@ -1,0 +1,68 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="instance-method">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+		<p prop>
+			This is Cat.
+		</p>
+		<toggle-tag></toggle-tag>
+		<toggle-tag></toggle-tag>
+		<span class="hello">Hello</span>
+	</template>
+	<script>
+		Polymer({
+			is : "instance-method",
+			_says : 'meow',
+			speak : function(){
+				console.log(this._says);
+			},
+			properties : {
+				prop : {
+					type : Boolean,
+					reflectToAttribute : true,
+					value : "prop"
+				}
+			},
+			ready : function() {
+				this.addEventListener("fire", function(){
+					
+					this.speak();
+				});
+				//'fire' 이벤트 실행
+				this.fire("fire");
+
+				//click 디바운스 생성 1초후 실행
+				this.debounce("click", function(){
+					
+				}, 1000);
+				//해당 디바운스를 즉각실행하고 대기상태를 취소합니다.
+				this.flushDebouncer("click");
+				//해당 디바운스를 취소합니다.
+				this.cancelDebouncer("click");
+				//해당 디바운스가 준비중이면 true를 반환합니다.
+				console.log(this.isDebouncerActive("click"));
+
+				//select 클래스를 추가합니다.
+				this.toggleClass("select", true);
+
+				//prop 속성을 p에서 span으로 옮깁니다.
+				this.attributeFollows("prop", this.$$('span'), this.$$('p'));
+
+				//hello 클래스를 span에서 p로 옮깁니다.
+				this.classFollows("hello", this.$$('p'), this.$$('span'));
+
+				//toggle-tag.html을 임포트합니다.
+				this.importHref(this.resolveUrl("toggle-tag.html"), function(){
+					console.log("import success");
+				}, function(){
+					console.log("import failed");
+				});
+			}
+		});
+	</script>
+</dom-module>
