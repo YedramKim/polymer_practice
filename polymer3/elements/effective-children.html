@@ -1,0 +1,20 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="effective-children">
+	<template>
+		<content id="mycontent" select="p"></content>
+	</template>
+	<script>
+		Polymer({
+			is : "effective-children",
+			ready : function() {
+				//해당 컨텐트가 가져오는 노드들을 반환
+				var content = this.getContentChildren('#mycontent');
+				
+				//자식 요소로 받은 모든 요소를 반환
+				var elements = this.getEffectiveChildren();
+				console.log(elements)
+			}
+		});
+	</script>
+</dom-module>

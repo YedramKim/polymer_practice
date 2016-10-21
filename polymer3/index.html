@@ -5,6 +5,11 @@
 	<title>Document</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<!-- <script>
+		window.Polymer = {
+			dom : "shadow"
+		}
+	</script> -->
 	<link rel="import" href="/elements/declared-properties.html">
 	<link rel="import" href="/elements/instance-method.html">
 	<link rel="import" href="/elements/key-test.html">
@@ -15,6 +20,13 @@
 	<instance-method></instance-method>
 	<!-- key-test :  iron-a11y-announcer 테스트 해보기 위한 커스텀 엘리먼트 -->
 	<key-test></key-test>
+	<local-dom>
+		<p class="first">Hello, first</p>
+		<p class="second">Hello, second</p>
+		<p class="third">Hello, third</p>
+		<h1>sdas</h1>
+		<span>sas</span>
+	</local-dom>
 	<script>
 		// factoryImpl 메서드는  Polymer로 반환된 생성자 함수로 
 		//엘리멘트를 생성했을 경우에만 실행이 되는 메서드다.

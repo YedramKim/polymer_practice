@@ -1,12 +1,39 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="local-dom">
-	<template>
-		
+	<template strip-whitespace>
+		<content></content>
 	</template>
 	<script>
 		Polymer({
-			is : "local-dom"
+			is : "local-dom",
+			ready : function() {
+				var dom = Polymer.dom(this);
+				this.dom = dom;
+				
+				this.observer = dom.observeNodes(function(info) {
+					if(info.addedNodes.length !== 0){
+						console.log(info.addedNodes);
+					}
+					if(info.removedNodes.length !== 0){
+						console.log(info.removedNodes);
+					}
+					info.addedNodes;
+					info.removedNodes;
+				});
+			},
+			attached : function(){
+				var text = document.createElement("p");
+				text.textContent="text";
+				this.dom.appendChild(text);
+
+				var last=this.dom.firstChild;
+				this.dom.removeChild(last);
+
+				console.log(Polymer.dom(this.root).childNodes.length)
+			}
 		});
 	</script>
 </dom-module>
+The observeNodes method behaves slightly differently depending on the node being observed:
+
