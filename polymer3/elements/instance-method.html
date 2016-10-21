@@ -34,7 +34,7 @@
 					this.speak();
 				});
 				//'fire' 이벤트 실행
-				this.fire("fire");
+				//this.fire("fire");
 
 				//click 디바운스 생성 1초후 실행
 				this.debounce("click", function(){
@@ -45,7 +45,7 @@
 				//해당 디바운스를 취소합니다.
 				this.cancelDebouncer("click");
 				//해당 디바운스가 준비중이면 true를 반환합니다.
-				console.log(this.isDebouncerActive("click"));
+				//console.log(this.isDebouncerActive("click"));
 
 				//select 클래스를 추가합니다.
 				this.toggleClass("select", true);
@@ -58,9 +58,9 @@
 
 				//toggle-tag.html을 임포트합니다.
 				this.importHref(this.resolveUrl("toggle-tag.html"), function(){
-					console.log("import success");
+					//console.log("import success");
 				}, function(){
-					console.log("import failed");
+					//console.log("import failed");
 				});
 			}
 		});

@@ -1,0 +1,49 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+
+<dom-module id="key-test">
+	<template>
+		<style>
+			:host{
+				display: block;
+				margin: 10px 0;
+				padding: 10px;
+				background: #eee;
+				border-radius: 5px;
+			}
+		</style>
+		<h1>
+			Key test : [[data]]
+		</h1>
+	</template>
+	<script>
+		Polymer({
+			is : "key-test",
+			behaviors : [Polymer.IronA11yKeysBehavior],
+			properties : {
+				data : {
+					type : String
+				},
+				/*key event를 적용할 타겟. 반드시 넣어야함!!!!!*/
+				keyEventTarget : {
+					type : Object,
+					value : function() {
+						return document.body;
+					}
+				}
+			},
+			keyBindings : {
+				'a' : '_pressedKey',
+				'shift+tab shift+space' : 'keyPressed'
+			},
+			_pressedKey : function(e){
+				console.log(e.detail.combo)
+				this.data="Press " + e.detail.combo;
+			},
+			keyPressed : function(e){
+				console.log("key pressed")
+				this.data="Press " + e.detail.combo;
+			}
+		});
+	</script>
+</dom-module>
