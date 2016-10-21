@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/iron-input/iron-input.html">
 <link rel="import" href="./toggle-icon.html">
 
-<dom-module id="user-element">
+<dom-module id="declared-properties">
 	<template>
 		<p>
 			Hello!!
@@ -23,12 +23,15 @@
 		
 	<script>
 		var userElement = Polymer({
-			is : "user-element",
+			is : "declared-properties",
 			ready : function() {
 				this.addEventListener("data-value-changed", function(){
 					console.log("change data-value : ", this.getAttribute("data-value"));
 				});
-				console.log();
+				console.log(this.response);
+				this._setResponse(1);
+				console.log(this.response);
+
 			},
 			properties : {
 				user : {
@@ -57,9 +60,10 @@
 					readOnly : true
 				},
 				response : {
-					type : String,
-					readonly : true,
-					notify : true
+					type : Object,
+					readOnly : true,
+					notify : true,
+					reflectToAttribute : true
 				}
 			},
 			_length : function(obj){
