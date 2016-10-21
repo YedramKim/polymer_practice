@@ -13,10 +13,10 @@
 				
 				this.observer = dom.observeNodes(function(info) {
 					if(info.addedNodes.length !== 0){
-						console.log(info.addedNodes);
+						//console.log(info.addedNodes);
 					}
 					if(info.removedNodes.length !== 0){
-						console.log(info.removedNodes);
+						//console.log(info.removedNodes);
 					}
 					info.addedNodes;
 					info.removedNodes;
@@ -30,7 +30,7 @@
 				var last=this.dom.firstChild;
 				this.dom.removeChild(last);
 
-				console.log(Polymer.dom(this.root).childNodes.length)
+				//console.log(Polymer.dom(this.root).childNodes.length)
 			}
 		});
 	</script>

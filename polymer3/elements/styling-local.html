@@ -1,0 +1,20 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="styling-local">
+	<template>
+		<style>
+			p ::content > *{
+				background: orange;
+			}
+		</style>
+		<p>
+			fdsds
+			<content></content>
+		</p>
+	</template>
+	<script>
+		Polymer({
+			is : "styling-local"
+		})
+	</script>
+</dom-module>
