@@ -1,13 +1,62 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="event-node">
-	<style></style>
+	<style>
+		:host{
+			margin: 20px;
+			display: block;
+			padding: 30px;
+			border: 1px solid #000;
+		}
+	</style>
 	<template>
-		handel
+		<h1 on-click="HTMLTapEvent" id="h1">This is event test elements</h1>
+		<p id="p">trigger the `p` tap event</p>
+		<span on-myevent="myevent">sfdsfd</span>
+		<content></content>
 	</template>
 	<script>
 		Polymer({
-			is : "event-node"
+			is : "event-node",
+			ready : function(){
+				this.fire("myevent", {msg : "fire myevent"}, {
+					node : this.$$("span")
+				});
+				this.listen(this.$$("span"), "click", "clickevent");
+				//이벤트 취소
+				this.unlisten(this.$$("span"), "click", "clickevent");
+			},
+			listeners : {
+				'click' : 'tapEvent',
+				'p.click' : 'pTapEvent'
+			},
+			HTMLTapEvent : function(e) {
+				//e.stopPropagation();
+				//console.log("trigger HTML attribute event");
+				//myevent 실행
+				this.fire("myevent", {msg : "fire myevent"}, {
+					node : this.$$("span")
+				});
+			},
+			tapEvent : function(e) {
+				//console.log("trigger tapevent");
+
+				var eventdom = Polymer.dom(e);
+
+				//console.log("rootTarget is : ", eventdom.rootTarget);
+				//console.log("localTarget is : ", eventdom.localTarget);
+				//console.log("path is : ", eventdom.path);
+			},
+			pTapEvent : function(e) {
+				//e.stopPropagation();
+				//console.log("trigger p element tapevent");
+			},
+			myevent : function(e){
+				//console.log(e.detail.msg);
+			},
+			clickevent : function() {
+				//console.log("click span")
+			}
 		});
 	</script>
 </dom-module>

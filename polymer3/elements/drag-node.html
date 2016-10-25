@@ -1,0 +1,59 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="drag-node">
+	<style>
+	#dragme{
+		width: 500px;
+		height: 500px;
+		background: #aaa;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-o-user-select: none;
+		user-select: none;
+	}
+	</style>
+	<template>
+		<input type="checkbox" id="check">
+		<div id="dragme">{{message}}</div>
+	</template>
+	<script>
+		Polymer({
+			is : "drag-node",
+			ready : function(){
+				this.setScrollDirection("y", this.$.dragme);
+			},
+			listeners : {
+				"dragme.track" : "handleTrack",
+				"down" : "ondown",
+				"up" : "onup",
+				"tap" : "ontap",
+				"dragme.scroll" : "onscroll"
+			},
+			onscroll : function(e) {
+				console.log("scroll");
+			},
+			ondown : function(e) {
+				//console.log("down");
+			},
+			onup : function(e) {
+				//console.log("up");
+			},
+			ontap : function(e) {
+				//console.log("tap");
+			},
+			handleTrack : function(e) {
+				var state = e.detail.state;
+				if(state === "start") {
+					this.message = "tracking started!";
+				}else if (state === "track") {
+					this.message = "Tracking in Progress... ";
+					this.message += e.detail.dx + ", " + e.detail.dy;
+				}else if(state === "end") {
+					this.message = "tracking ended!";
+				}
+
+			}
+		});
+	</script>
+</dom-module>

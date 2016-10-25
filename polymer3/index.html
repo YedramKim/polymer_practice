@@ -4,6 +4,11 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+	</style>
 	<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 	<!-- <script>
 		window.Polymer = {
@@ -16,13 +21,7 @@
 	<link rel="import" href="./elements/local-dom.html">
 	<link rel="import" href="./elements/styling-local.html">
 	<link rel="import" href="./elements/event-node.html">
-	<style is="custom-style">
-		*{
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-	</style>
+	<link rel="import" href="./elements/drag-node.html">
 </head>
 <body>
 	<declared-properties data-value="dsds" response="40"></declared-properties>
@@ -40,7 +39,10 @@
 		<div class="special">Is Special</div>
 		<p>this is child of content</p>
 	</styling-local>
-	<event-node></event-node>
+	<event-node>
+		<h2>h2</h2>
+	</event-node>
+	<drag-node></drag-node>
 	<script>
 		// factoryImpl 메서드는  Polymer로 반환된 생성자 함수로 
 		//엘리멘트를 생성했을 경우에만 실행이 되는 메서드다.
@@ -53,5 +55,3 @@
 	</script>
 </body>
 </html>
-폴리머 엘리멘츠의 일환으로 정의될 때 
-커스텀 스타일의 모든 기능을 사용할 수 있습니다.
