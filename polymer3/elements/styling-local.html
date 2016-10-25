@@ -3,8 +3,7 @@
 <link rel="import" href="./css-style.html">
 
 <dom-module id="styling-local">
-	<style include="css-style"></style>
-	<style>
+	<style include="css-style">
 		:host {
 			display: block;
 			border: 1px solid #000;
@@ -40,11 +39,12 @@
 			<div>
 				
 			<div id="child-element">In local DOM!</div>
-			<div class="content-wrapper"><content></content></div>
+			<div class="content-wrapper tar"><content></content></div>
 			<styling-child></styling-child>
 			<p>text</p>
 			<button on-tap="changeTheme">Change theme</button>
 			</div>
+			<div id="node">node</div>
 		</div>
 	</template>
 	<script>
@@ -55,6 +55,10 @@
 				this.updateStyles({
 					"--blue" : "#7878ff"
 				});
+			},
+			ready : function() {
+				console.log(this.$.node);
+				//this.scopeSubtree(this.$.node, true);
 			}
 		});
 	</script>
