@@ -15,6 +15,13 @@
 	<link rel="import" href="/elements/key-test.html">
 	<link rel="import" href="/elements/local-dom.html">
 	<link rel="import" href="/elements/styling-local.html">
+	<style is="custom-style">
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+	</style>
 </head>
 <body>
 	<declared-properties data-value="dsds" response="40"></declared-properties>
@@ -29,9 +36,8 @@
 		<span>sas</span>
 	</local-dom>
 	<styling-local>
-		<p>
-			dsds
-		</p>
+		<div class="special">Is Special</div>
+		<p>this is child of content</p>
 	</styling-local>
 	<script>
 		// factoryImpl 메서드는  Polymer로 반환된 생성자 함수로 
@@ -45,3 +51,5 @@
 	</script>
 </body>
 </html>
+폴리머 엘리멘츠의 일환으로 정의될 때 
+커스텀 스타일의 모든 기능을 사용할 수 있습니다.

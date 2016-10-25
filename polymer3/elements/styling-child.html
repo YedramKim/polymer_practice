@@ -1,0 +1,22 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="styling-child">
+	<style>
+	:host{
+		@apply(--styling-child);
+	}
+	:host > *{
+		background: #fff !important;
+		color: var(--red, #f1f) !important;
+	}
+	</style>
+	<template>
+		<div class="style1">Style1</div>
+		<div class="style2">Style1</div>
+	</template>
+	<script>
+		Polymer({
+			is : "styling-child"
+		});
+	</script>
+</dom-module>

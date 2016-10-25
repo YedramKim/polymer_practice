@@ -1,20 +1,61 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./styling-child.html">
+<link rel="import" href="./css-style.html">
 
 <dom-module id="styling-local">
-	<template>
-		<style>
-			p ::content > *{
-				background: orange;
+	<style include="css-style"></style>
+	<style>
+		:host {
+			display: block;
+			border: 1px solid #000;
+			--red : #f00;
+			--blue : #00f;
+			--styling-child : {
+				display: block;
+				border: 1px solid #000;
+				margin: 10px;
+				padding: 2px;
+				background: #fff !important;
 			}
-		</style>
-		<p>
-			fdsds
-			<content></content>
-		</p>
+		}
+		:host *{
+			color: var(--red);
+		}
+		:host *{
+			color:var(--blue, #fff);
+		}
+		#child-element {
+			background: #ff0;
+		}
+		/*= :host /deep/ * */
+		:host ::shadow *{
+			
+		}
+		.content-wrapper ::content > .special{
+			background: orange;
+		}
+	</style>
+	<template>
+		<div class="temp tac">
+			<div>
+				
+			<div id="child-element">In local DOM!</div>
+			<div class="content-wrapper"><content></content></div>
+			<styling-child></styling-child>
+			<p>text</p>
+			<button on-tap="changeTheme">Change theme</button>
+			</div>
+		</div>
 	</template>
 	<script>
 		Polymer({
-			is : "styling-local"
-		})
+			is : "styling-local",
+			changeTheme : function() {
+				this.customStyle['--red'] = "#ff8282";
+				this.updateStyles({
+					"--blue" : "#7878ff"
+				});
+			}
+		});
 	</script>
 </dom-module>
