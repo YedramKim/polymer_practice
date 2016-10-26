@@ -1,20 +1,83 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="./child-element.html">
 
 <dom-module id="data-system">
 	<style>
 	:host{
-		margin: 10px;
-		border: 1px #000 solid;
 		display: block;
-		padding: 10px;
 	}
+	div{
+		padding: 10px;
+		border: 1px #000 solid;
+		margin: 10px 0;
+	}
+
 	</style>
-	<template></template>
+	<template>
+		<input type="text" value="{{dataValue::input}}">
+		{{dataValue}}
+		<div class="obj_show">
+			{{obj.name}}
+		</div>
+
+		<div class="array_show">
+			{{dataArray}}
+		</div>
+		<child-element data-value="{{dataValue}}"></child-element>
+	</template>
 	<script>
 		Polymer({
 			is : "data-system",
-			ready : function() {
+			properties : {
+				bo : {
+					type : Boolean,
+					value : false
+				},
+				dataValue : {
+					type : String,
+					notify : true,
+					value : "abc"
+				},
+				dataArray : {
+					type : Array,
+					notify : true,
+					readOnly : false,
+					value : [1, 2, 3],
+					computed : "computedDataArray(dataValue)"
+				},
+				dataObject : {
+					type : Object,
+					notify : true,
+					value : {name : "abc"}
+				},
+				data : {
+					type : String,
+					reflectToAttribute : true
+				},
+			},
+			computedDataArray :function(data) {
+				var array = [];
+				array = [];
+				for(var i = 0; i < data.length; i++) {
+					array[i] = i + 1;
+				}
 
+				return array;
+			},
+			ready : function() {
+				this.addEventListener("data-array-changed", function(e) {
+					//console.log(e.detail.path)
+				});
+				this.addEventListener("data-object-changed", function(e) {
+					//console.log(e.detail.value)
+				});
+
+				//서브 프로퍼티 변화
+				this.obj = {};
+				this.obj.name = "names";
+				// notifyPath에는 두번째 매개변수로 바꿀 값을 넣을수도 있다.
+				this.notifyPath("obj.name");
 			}
 		});
 	</script>
