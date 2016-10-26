@@ -7,11 +7,54 @@
 		}
 	</style>
 	<template>
-		This is object
+		<p>
+			{{dataObject}}
+		</p>
+		<p>
+			{{dataObject.object}}
+		</p>
+		<button on-tap="removeUser">remove User</button>
+		<template is="dom-repeat" items="[[users]]">
+			<p>
+				{{item}}
+			</p>
+		</template>
 	</template>
 	<script>
 		Polymer({
-			is : "object-array"
+			is : "object-array",
+			properties : {
+				objectInfo : {
+					type : String
+				}
+			},
+			observers : [
+				"displayArray(dataArray.length)"
+			],
+			displayArray : function(arr) {
+				//console.log(arr);
+			},
+			removeUser : function() {
+				this.shift("users");
+			},
+			ready : function() {
+				this.users = ["Polymer", "React", "Angular", "NodeJS", "jQuery"];
+
+				this.dataArray = [];
+				this.push("dataArray", 1);
+
+				this.dataObject = {
+					name : "polymer",
+					type : "library",
+					object : "sd"
+				};
+				this.set("dataObject.object", 10);
+				this.set("dataObject", this.dataObject);
+				this.notifyPath("dataObject", this.dataObject);
+			},
+			stringify : function(data) {
+				return JSON.stringify(data)
+			}
 		});
 	</script>
 </dom-module>
