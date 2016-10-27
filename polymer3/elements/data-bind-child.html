@@ -1,0 +1,42 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="data-bind-child">
+	<style>
+	:host{
+		display: block;
+		width: 100px;
+		height: 100px;
+		background: #ff6e8d;
+		color: #fff;
+		padding: 10px;
+	}
+	</style>
+	<template>
+		<content></content>
+	</template>
+	<script>
+		Polymer({
+			is : "data-bind-child",
+			properties : {
+				str : {
+					type : String,
+					reflectToAttribute : true,
+					value : "start",
+					notify : true
+				}
+			},
+			listeners : {
+				"tap" : "tapEvent"
+			},
+			ready : function() {
+				this.addEventListener("str-changed", function() {
+					console.log("fire");
+				});
+			},
+			tapEvent : function() {
+				this.str += "tap";
+				console.log("tap")
+			}
+		});
+	</script>
+</dom-module>

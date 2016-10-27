@@ -1,18 +1,74 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="./data-bind-child.html">
 
 <dom-module id="data-binding">
 	<style>
 	:host{
 		display: block;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-o-user-select: none;
+		user-select: none;
 	}
 	</style>
-	<template></template>
+	<template>
+		<p>
+			[[computedObject(array.*, 0)]]
+			[[computedObject(obj.*, "name")]]
+		</p>
+		<p>
+			[[event]]
+		</p>
+		<data-bind-child str="{{event}}" id="child">[[event]]</data-bind-child>
+	</template>
 	<script>
 		Polymer({
 			is : "data-binding",
-			 ready : function() {
-
-			 }
+			properties : {
+				array : {
+					type : Array,
+					value : [1, 2, 3, 4]
+				},
+				obj : {
+					type : Object,
+					value : {
+						name : "Amazing is Computed"
+					}
+				},
+				event : {
+					type : String,
+					notify : true,
+					reflectToAttribute : true
+				}
+			},
+			listeners : {
+				"tap" : "taplistener"
+			},
+			taplistener : function() {
+				this.set("array.0", this.array[0] + 10);
+			},
+			observers : [
+				"arrayInfo(array.#0)"
+			],
+			arrayInfo : function(data) {
+				//console.log(data);
+			},
+			computedObject : function(data, path = undefined) {
+				if(path === undefined) {
+					return data.base;
+				}else {
+					return this.get(path, data.base);
+				}
+			},
+			ready : function() {
+				//배열 변화 notify
+				//this.event = "child ready";
+				this.array[0] = 100;
+				this.set("array.0", 1000);
+				this.notifySplices("array", []);
+			}
 		});
 	</script>
 </dom-module>
