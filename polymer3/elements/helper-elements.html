@@ -1,1 +1,50 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="helper-elements">
+	<style>
+	:host{
+		display: block;
+	}
+	.repeat{
+		background: #ddd;
+	}
+	</style>
+	<template>
+		<div class="repeat_area">
+			<template is="dom-repeat" items="{{array}}" sort="sortFilter" filter="repeatFilter" id="repeat">
+				<div class="repeat">
+					<p>This index is {{index}}</p>
+					<p>{{item.name}} is {{item.type}}</p>
+					<button on-tap="repeatTap">click!!</button>
+				</div>
+			</template>
+		</div>
+	</template>
+	<script>
+		Polymer({
+			is : "helper-elements",
+			ready : function() {
+				this.array = [
+					{name : "Polymer", type : "framework"},
+					{name : "react", type : "framework"},
+					{name : "angular", type : "framework"},
+					{name : "jQuery", type : "library"},
+					{name : "npm", type : "tool"}
+				];
+
+				this.set("array.3.type", "framework");
+			},
+			repeatTap : function(e) {
+				var model = e.model;
+				model.set("index", model.index+1);
+			},
+			repeatFilter : function(item) {
+				return item.type.trim() === "framework";
+			},
+			sortFilter : function(prev, next) {
+				return prev.name > next.name ? 1 : -1;
+			}
+		});
+
+	</script>
+</dom-module>
