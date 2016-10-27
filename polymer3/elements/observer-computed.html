@@ -7,11 +7,75 @@
 	}
 	</style>
 	<template>
-		observer-computed
+		<p>
+			{{user.name.firstName}}
+			{{user.name.lastName}}
+		</p>
+		<input type="text" value="{{user.name.firstName::input}}" placeholder="firstName">
+		<input type="text" value="{{user.name.lastName::input}}" placeholder="lastName">
 	</template>
 	<script>
 		Polymer({
-			is : "observer-computed"
+			is : "observer-computed",
+			properties : {
+				prop : {
+					type : String,
+					value : "prop",
+					observer : "_propObserver"
+				},
+				object : {
+					type : Object,
+					value : {
+						name : "a"
+					},
+					observer : "_objectObserver"
+				},
+				array : {
+					type : Array,
+					value : [0, 1, 2, 3, 4, 5]
+				},
+				user : {
+					type : Object,
+					value : {
+						name : {}
+					}
+				}
+			},
+			observers : [
+				"_objectObserverProp(object.name)",
+				"showName(firstName, lastName)",
+				"arrayInfo(array.splices)",
+				"userChange(user.*)"
+			],
+			arrayInfo : function(data){
+				if(data === undefined){
+					return;
+				}
+				//console.log(data.indexSplices[0]);
+			},
+			userChange : function(data) {
+				//console.log("path : " + data.path);
+				//console.log("value : " + data.value);
+			},
+			showName : function(n1, n2) {
+				//console.log(n1, n2);
+			},
+			_propObserver : function() {
+				//console.log(this.prop);
+			},
+			_objectObserver : function() {
+				//console.log(this.object)
+			},
+			_objectObserverProp : function(data) {
+				//console.log(data);
+			},
+			ready : function() {
+				//this.set("object.name", "as")
+				this.set("firstName", "Steve");
+				this.set("lastName", "Jobs");
+
+				this.splice("array", 3, 2, 1, 2, 3);
+			}
 		});
 	</script>
 </dom-module>
