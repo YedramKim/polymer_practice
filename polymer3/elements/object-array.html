@@ -8,17 +8,17 @@
 	</style>
 	<template>
 		<p>
-			{{dataObject}}
+			{{stringify(dataObject)}}
 		</p>
 		<p>
 			{{dataObject.object}}
 		</p>
-		<button on-tap="removeUser">remove User</button>
 		<template is="dom-repeat" items="[[users]]">
 			<p>
 				{{item}}
 			</p>
 		</template>
+		<button on-tap="removeUser">remove User</button>
 	</template>
 	<script>
 		Polymer({
@@ -26,6 +26,18 @@
 			properties : {
 				objectInfo : {
 					type : String
+				},
+				base : {
+					type : Object,
+					notify : true
+				},
+				linked : {
+					type : Object,
+					notify : true
+				},
+				users : {
+					type : Array,
+					value : ["Polymer", "React", "Angular", "NodeJS", "jQuery"]
 				}
 			},
 			observers : [
@@ -35,11 +47,9 @@
 				//console.log(arr);
 			},
 			removeUser : function() {
-				this.shift("users");
+				this.pop("users");
 			},
 			ready : function() {
-				this.users = ["Polymer", "React", "Angular", "NodeJS", "jQuery"];
-
 				this.dataArray = [];
 				this.push("dataArray", 1);
 
@@ -53,7 +63,7 @@
 				this.notifyPath("dataObject", this.dataObject);
 			},
 			stringify : function(data) {
-				return JSON.stringify(data)
+				return JSON.stringify(data);
 			}
 		});
 	</script>
