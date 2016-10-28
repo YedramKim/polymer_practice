@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="helper-elements">
 	<style>
@@ -8,14 +9,36 @@
 	.repeat{
 		background: #ddd;
 	}
+	.only{
+		background: #ffa2a2;
+	}
 	</style>
 	<template>
+		<div>
+			<input type="text" placeholder="search Keyword" value="{{searchName::input}}">
+		</div>
 		<div class="repeat_area">
-			<template is="dom-repeat" items="{{array}}" sort="sortFilter" filter="repeatFilter" id="repeat">
+			<template is="dom-repeat" items="{{array}}" sort="sortFilter" filter="{{dynamicFilter(searchName)}}" initial-count="10" id="repeat" observe="type">
 				<div class="repeat">
-					<p>This index is {{index}}</p>
+					<p>This number is {{index}}</p>
 					<p>{{item.name}} is {{item.type}}</p>
 					<button on-tap="repeatTap">click!!</button>
+					<button on-tap="removeTap">remove</button>
+				</div>
+			</template>
+
+			<array-selector id="only" items="{{array}}" toggle selected-item="{{only}}"></array-selector>
+
+			<array-selector id="selector" items="{{array}}" selected="{{selected}}" multi toggle></array-selector>
+
+			<template is="dom-if" if="{{only}}">
+				<h1 class="only">{{only.name}} is {{only.type}}</h1>
+			</template>
+
+			<template is="dom-repeat" items="{{selected}}" id="repeat2">
+				<div class="repeat">
+					<p>This number is {{index}}</p>
+					<p>{{item.name}} is {{item.type}}</p>
 				</div>
 			</template>
 		</div>
@@ -24,27 +47,47 @@
 		Polymer({
 			is : "helper-elements",
 			ready : function() {
+				this.searchName = "";
 				this.array = [
 					{name : "Polymer", type : "framework"},
 					{name : "react", type : "framework"},
 					{name : "angular", type : "framework"},
 					{name : "jQuery", type : "library"},
-					{name : "npm", type : "tool"}
+					{name : "npm", type : "tool"},
 				];
-
-				this.set("array.3.type", "framework");
 			},
 			repeatTap : function(e) {
-				var model = e.model;
-				model.set("index", model.index+1);
+				var item = this.$.repeat.itemForElement(e.target);
+				this.$.selector.select(item);
+				this.$.only.select(item);
+			},
+			observers : [
+				"log(ajax)"
+			],
+			log : function(data) {
+				console.log(data);
+			},
+			removeTap : function(e) {
+				this.$.selector.deselect(e.model.item)
 			},
 			repeatFilter : function(item) {
 				return item.type.trim() === "framework";
+			},
+			dynamicFilter : function(keyword) {
+				return function(item) {
+					if(keyword.trim() === ""){
+						return true;
+					}
+					if(item.name.toLowerCase().indexOf(keyword) === -1) {
+						return false;
+					}else {
+						return true;
+					}
+				};
 			},
 			sortFilter : function(prev, next) {
 				return prev.name > next.name ? 1 : -1;
 			}
 		});
-
 	</script>
 </dom-module>

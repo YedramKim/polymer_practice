@@ -27,6 +27,8 @@
 	<link rel="import" href="./elements/observer-computed.html">
 	<link rel="import" href="./elements/data-binding.html">
 	<link rel="import" href="./elements/helper-elements.html">
+	<link rel="import" href="./bower_components/polymer/polymer.html">
+<link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
 </head>
 <body>
 	<declared-properties data-value="dsds" response="40"></declared-properties>
@@ -53,7 +55,16 @@
 	<observer-computed></observer-computed>
 	<data-binding></data-binding>
 	<helper-elements></helper-elements>
+	<template id="bind" is="dom-bind">
+		<iron-ajax id="a" url="/obj.json" last-response="{{res}}" auto></iron-ajax>
+
+		<template is="dom-if" if="res">
+			<h1>{{res.name}}, {{res.type}}</h1>
+		</template>
+	</template>
 	<script>
+		var bind = document.getElementById("bind");
+		var a = document.getElementById("a");
 		// factoryImpl 메서드는  Polymer로 반환된 생성자 함수로 
 		//엘리멘트를 생성했을 경우에만 실행이 되는 메서드다.
 		/*var MyElement = Polymer({
