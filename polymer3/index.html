@@ -9,7 +9,7 @@
 			box-sizing: border-box;
 		}
 	</style>
-	<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 	<!-- <script>
 		window.Polymer = {
 			dom : "shadow"
@@ -56,9 +56,11 @@
 	<data-binding></data-binding>
 	<helper-elements></helper-elements>
 	<template id="bind" is="dom-bind">
-		<iron-ajax id="a" url="/obj.json" last-response="{{res}}" auto></iron-ajax>
-
-		<template is="dom-if" if="res">
+		<!-- <iron-ajax id="a" url="./obj.json" last-response="{{res}}" auto></iron-ajax> -->
+		<script>
+			var res = {name :"a", type : "B"}
+		</script>
+		<template is="dom-if" if="{{res}}">
 			<h1>{{res.name}}, {{res.type}}</h1>
 		</template>
 	</template>
