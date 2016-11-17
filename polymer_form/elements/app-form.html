@@ -1,0 +1,19 @@
+<link rel="import" href="./form-input.html">
+
+<dom-module id="app-form">
+	<style>
+		
+	</style>
+	<template>
+		<form action="/form">
+			<form-input name="text1" value="10" placeholder="1"></form-input>
+			<form-input name="text2" value="10" placeholder="2"></form-input>
+			<button>확인</button>
+		</form>
+	</template>
+	<script>
+		Polymer({
+			is : "app-form"
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,103 @@
+<dom-module id="app-location-study">
+	<style>
+		:host{
+			display: block;
+			width: 1000px;
+		}
+		a{
+			text-decoration: none;
+			display: block;
+			height: 40px;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
+		p.iron-selected > a{
+			font-weight: bold;
+		}
+	</style>
+	<template>
+		<app-location route="{{route}}"></app-location>
+		<app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subRoute}}"></app-route>
+		<iron-selector selected="[[page]]" role="navigation" attr-for-selected="name" fallback-selection="404">
+			<p on-tap="showToast" name="main">
+				<a href="/">/</a>
+			</p>
+			<p on-tap="showToast" name="action">
+				<a href="/action">/action</a>
+			</p>
+			<p on-tap="showToast" name="control">
+				<a href="/control">/control</a>
+			</p>
+			<p on-tap="showToast" name="404">
+				<a href="/link">/link</a>
+			</p>
+		</iron-selector>
+		<iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404">
+			<p name="main">main page</p>
+			<p name="action">action page</p>
+			<p name="control">control page</p>
+			<p name="404">404 page</p>
+		</iron-pages>
+		<paper-toast class="toast" duration="2000"></paper-toast>
+		<!-- <iron-scroll-threshold id="scroll"  on-lower-threshold="addArray" scroll-target="document" lower-threshold="20">
+			<p>sasa</p>
+			<template is="dom-repeat" items="[[array]]">
+				<div style="min-height: 100px;">[[item]]</div>
+			</template>
+			<p>sasa</p>
+		</iron-scroll-threshold> -->
+	</template>
+	<script>
+		Polymer({
+			is : "app-location-study",
+			ready : function() {
+				window.app = this;
+			},
+			showToast : function() {
+				var toast = this.$$(".toast");
+				if(!toast.opened) {
+					toast.text = this.page;
+					toast.show();
+				}else {
+					this.cancelAsync(this.timer);
+					toast.close();
+					this.timer = this.async(function() {
+						toast.text = this.page;
+						toast.show();
+					}, 100);
+				}
+			},
+			addArray : function(e) {
+				for(var i = 0; i < 5; i++) {
+					this.push("array", this.array.length + 1);
+				}
+				this.$.scroll.clearTriggers();
+			},
+			properties : {
+				array : {
+					type : Array,
+					value : [1, 2, 3, 4, 5, 6, 7, 8, 9]
+				},
+				route : Object,
+				page : {
+					type : "String"
+				},
+				timer : {
+					type : Number,
+					value : -1
+				}
+			},
+			observers : [
+				"showRoute(routeData.page)"
+			],
+			showRoute : function() {
+				this.page = this.routeData.page ? this.routeData.page : "main";
+				//console.clear();
+				/*console.log("route", this.route);
+				console.log("routedata", this.routeData);
+				console.log("subroute", this.subRoute);*/
+			}
+		});
+	</script>
+</dom-module>
